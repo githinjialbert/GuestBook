@@ -41,11 +41,6 @@
         <select id="country" name="country" required>
             <option value="" disabled selected>Select your nationality</option>
             <?php 
-            // PHP code to dynamically generate country options
-            $countries = ["United States", "Canada", "United Kingdom", "Australia", "India", "China", "Japan", "Germany", "France", "Italy"];
-            foreach ($countries as $country) {
-                echo "<option value=\"$country\">$country</option>";
-            }
             ?>
         </select>
 
