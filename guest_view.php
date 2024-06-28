@@ -10,7 +10,7 @@
     <main>
         <h1>Guest Registration Form</h1>
         <p>Welcome to Moya Safari Villa, please fill out the details <br> below in order for us to check you in.</p>
-        <form action="upload.php" method="post" enctype="multipart/form-data">
+        <form action="includes/guest_contr.inc.php" method="post" enctype="multipart/form-data">
         <label for="fname">Name</label>
         <input type="text" id="fname" name="fname" placeholder="Firstname" required>
 
