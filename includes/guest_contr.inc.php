@@ -48,10 +48,13 @@ class GuestControl {
                 }
             }   
         }
-
-        if(empty($fname) || empty($lname) || empty($email) || empty($passport) || empty($address) || empty($address2) || empty($city) 
+        if (empty($fname) || empty($lname) || empty($email) || empty($passport) || empty($address) || empty($address2) || empty($city) 
         || empty($postal) || empty($country) || empty($image_filename) || empty($image_path) || empty($image_mime_type) || empty($image_size)) {
-       
-        }          
+    throw new Exception("Fill in all fields.");
+        }  
+        
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            throw new Exception("Please enter a valid email address.");
+        }
     }    
 }
