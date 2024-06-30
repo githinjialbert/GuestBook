@@ -85,12 +85,31 @@ class GuestControl {
                 throw new Exception("Invalid Passport Number");
             }
         }
-        
+
         function extractCountryCodeAndPassportNumber($passport) {
             $countryCode = substr($passport, 0, 2);
             $passportNumber = substr($passport, 2);
 
             return [$countryCode, $passportNumber];
         }
+
+        if (!preg_match("/^\d+ [a-zA-Z]+, \d+ [a-zA-Z]+, [a-zA-Z]+$/", $address, $address2)) {
+            throw new Exception("Invalid address format");
+        }
+
+        if(!preg_match("/^\d{6}-\d{5}/$", $postal)) {
+            throw new Exception("This postal address does not exist.");
+        }
+
+        try {
+            $this->sync->takeGuestInfo($fname, $lname, $email, $passport, $address, $address2, $city, 
+            $county, $postal, $country, $image_filename, $image_path, $image_mime_type, $image_size);
+            echo "Welcome. Your information has been submitted successfully";
+        } catch (PDOException $e) {
+            echo "An error occurred. Your information could not be submitted successfully.";
+        }
     }    
 }
+
+$guestControl = new GuestControl();
+$guestControl->guestBook();
