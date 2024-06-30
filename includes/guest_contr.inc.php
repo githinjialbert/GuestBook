@@ -84,13 +84,13 @@ class GuestControl {
             } else {
                 throw new Exception("Invalid Passport Number");
             }
+        }
+        
+        function extractCountryCodeAndPassportNumber($passport) {
+            $countryCode = substr($passport, 0, 2);
+            $passportNumber = substr($passport, 2);
 
-            function extractCountryCodeAndPassportNumber($passport) {
-                $countryCode = substr($passport, 0, 2);
-                $passportNumber = substr($passport, 2);
-
-                return [$countryCode, $passportNumber];
-            }
+            return [$countryCode, $passportNumber];
         }
     }    
 }
