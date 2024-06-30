@@ -56,5 +56,41 @@ class GuestControl {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             throw new Exception("Please enter a valid email address.");
         }
+
+        //PASSPORT IDENTIFICATION
+
+        function validateCountryCode($countryCode, $passportNumber) {
+
+            $patterns = [
+
+                'US' => '/^[a-zA-Z0-9]{9}/',
+                'KE' => '/^[a-zA-Z]{3}[0-9]{6}/',
+                'RWND' => '/^[a-zA-Z]{4}[0-9]{5}/',
+                'TZ' => '/^[a-zA-Z]{2}[0-9]{7}/',
+                'UG' => '/^[a-zA-Z]{2}[0-9]{7}/',
+                'SA' => '/^[a-zA-Z]{2}[0-9]{7}/',
+                'ETH' => '/^[a-zA-Z]{3}[0-9]{6}/',
+
+            ];
+
+            if(!isset($patterns[$countryCode])) {
+                throw new Exception("Unsupported country codes.");
+            }
+
+            if (preg_match($patterns[$countryCode], $passportNumber)) {
+
+                return true;
+
+            } else {
+                throw new Exception("Invalid Passport Number");
+            }
+
+            function extractCountryCodeAndPassportNumber($passport) {
+                $countryCode = substr($passport, 0, 2);
+                $passportNumber = substr($passport, 2);
+
+                return [$countryCode, $passportNumber];
+            }
+        }
     }    
 }
