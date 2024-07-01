@@ -1,7 +1,7 @@
 <?php
 
 require_once 'guest_model.inc.php';
-require_once 'sessions.php';
+require_once '../sessions.php';
 
 class GuestControl {
     private $sync;
@@ -30,9 +30,9 @@ class GuestControl {
             if (isset($_FILES["file"])) {
                 
                 $image_filename = htmlspecialchars($_FILES["file"]["name"]);
-                $image_path = $_FILES(["file"]["tmp_name"]);
-                $image_mime_type = $_FILES(["file"]["type"]);
-                $image_size = $_FILES(["file"]["size"]);
+                $image_path = $_FILES["file"]["tmp_name"];
+                $image_mime_type = $_FILES["file"]["type"];
+                $image_size = $_FILES["file"]["size"];
             
             //Move target files to a desired location 
             
@@ -93,11 +93,12 @@ class GuestControl {
             return [$countryCode, $passportNumber];
         }
 
-        if (!preg_match("/^\d+ [a-zA-Z]+, \d+ [a-zA-Z]+, [a-zA-Z]+$/", $address, $address2)) {
+        if (!preg_match("/^\d+\s+[a-zA-Z ]+,?\s*[a-zA-Z0-9 ]*,?\s*[a-zA-Z ]+$/", $address)) {
             throw new Exception("Invalid address format");
         }
+        
 
-        if(!preg_match("/^\d{6}-\d{5}/$", $postal)) {
+        if(!preg_match("/^\d{6}-\d{5}$/", $postal)) {
             throw new Exception("This postal address does not exist.");
         }
 
