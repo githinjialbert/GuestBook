@@ -106,6 +106,11 @@ class GuestControl {
             $this->sync->takeGuestInfo($fname, $lname, $email, $passport, $address, $address2, $city, 
             $county, $postal, $country, $image_filename, $image_path, $image_mime_type, $image_size);
             echo "Welcome. Your information has been submitted successfully";
+
+            $_SESSION["form_data"] = null;
+            header("Location: " . $_SERVER["PHP_SELF"]);
+            exit;
+
         } catch (PDOException $e) {
             echo "An error occurred. Your information could not be submitted successfully.";
         }
